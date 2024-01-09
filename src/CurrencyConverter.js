@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 
 function CurrencyConverter() {
-
-    const[convertedCurrency, setConvertedCurrency] =useState("This is the value we get after converting the currency")
+const[convertedAmount, setConvertedAmount] = useState("This is where the converted amount value will go")
   return (
     <>
     <div>
@@ -15,7 +14,7 @@ function CurrencyConverter() {
             <option value="option">Currency to</option>
         </select>
         <button id='convert'>Convert</button>
-        <div>{convertedCurrency}</div>
+        <div>{convertedAmount}</div>
     </div>
     </>
   )
