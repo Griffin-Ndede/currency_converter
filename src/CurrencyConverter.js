@@ -19,17 +19,9 @@ if(response.result === "success"){
     setRatesFetched(true);
 }
     }
+    fetchRates()
 }, [])
-//         try{
-//             const response = await fetch(URL);
-//             const json = await response.json();
-//             console.log(json);
-//         } catch(error){
-//             console.log("erro", error)
-//         }
-//     }
-//     fetchData();
-// },[])
+
 function handleCurrencyConversion(){
     setConvertedAmount("This is the converted amount")
 }
@@ -54,9 +46,17 @@ console.log(ratesFetched)
           <option defaultValue>USD</option>
         )}
       </select>
-            <select>
-                <option value="option">Currency to</option>
-            </select>
+      <select id="to">
+        {ratesFetched ? (
+          Object.keys(rates).map((currency, index) => (
+            <option key={index} value={currency}>
+              {currency}
+            </option>
+          ))
+        ) : (
+          <option defaultValue>EUR</option>
+        )}
+      </select>
         </div>
         <button id='convert'onClick={handleCurrencyConversion}>Convert</button>
         <div id='converted'>{convertedAmount}</div>
@@ -66,3 +66,14 @@ console.log(ratesFetched)
 }
 
 export default CurrencyConverter
+
+//         try{
+//             const response = await fetch(URL);
+//             const json = await response.json();
+//             console.log(json);
+//         } catch(error){
+//             console.log("erro", error)
+//         }
+//     }
+//     fetchData();
+// },[])
