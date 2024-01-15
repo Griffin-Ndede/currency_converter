@@ -40,9 +40,11 @@ function CurrencyConverter() {
 
     // Calculate the converted amount
     const output = amount * CurrencyRate;
+      // Format the output with commas after every three digits from the right
+  const formattedOutput = output.toLocaleString(undefined, { maximumFractionDigits: 2 });
 
-    // Update state with the calculated converted amount
-    setConvertedAmount(output);
+  // Update state with the formatted converted amount
+  setConvertedAmount(formattedOutput);
   };
 
   // JSX for rendering the component
