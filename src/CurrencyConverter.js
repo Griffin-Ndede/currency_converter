@@ -4,7 +4,7 @@ function CurrencyConverter() {
 
 const [rates, setRates] = useState();
 const [ratesFetched, setRatesFetched] = useState();
-const[convertedAmount, setConvertedAmount] = useState("This is where the converted amount value will go")
+const[convertedAmount, setConvertedAmount] = useState("Your currency is...")
 const [amount, setAmount] = useState(0);
 const [fromCurrency, setFromCurrency] = useState("USD");
 const [toCurrency, setToCurrency] = useState("USD");
@@ -26,11 +26,20 @@ if(response.result === "success"){
     fetchRates()
 }, [])
 
-function handleCurrencyConversion(){
-    setConvertedAmount("This is the converted amount")
-}
-console.log(ratesFetched)
-  return (
+
+const handleCurrencyConversion = async () => {
+        // fetch the selected from currency rates
+        const response = await fetch(
+          `https://v6.exchangerate-api.com/v6/0ba10b681bdf7772f0f7c96a/latest/${fromCurrency}`
+        ).then((response) => response.json());
+        const fetchedRates = response.conversion_rates;
+       // calculate and store the result
+        const CurrencyRate = fetchedRates[toCurrency];
+        const output = amount * CurrencyRate;
+        setConvertedAmount(output);
+      };
+
+return (
     <>
     <div id='page1'>
         <h1>Currency converter</h1>
